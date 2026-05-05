@@ -13,7 +13,7 @@ private:
 public:
     // Yapıcı fonksiyon artık başlangıç hızı ve yarıçapı da parametre olarak alabilir
     // Varsayılan değerler vererek esneklik sağlıyoruz
-    Top(float x, float y, float x_hizi = 5.0f, float y_hizi , float yaricap );
+    Top(float x, float y, float x_hizi , float y_hizi , float yaricap );
     
     ~Top() = default;
 
