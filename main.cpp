@@ -2,6 +2,6 @@
 
 int main() {
     Oyun breakout;
-    breakout.run(); 
+    breakout.calistir(); 
     return 0;
 }

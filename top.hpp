@@ -8,12 +8,13 @@ class Top {
 
 private:
     sf::CircleShape top_sekli;
-    sf::Vector2f top_hizi; 
+    float top_hizi_x;
+    float top_hizi_y;
+    
     float top_yarıcapi;   
 public:
-    // Yapıcı fonksiyon artık başlangıç hızı ve yarıçapı da parametre olarak alabilir
-    // Varsayılan değerler vererek esneklik sağlıyoruz
-    Top(float x, float y, float x_hizi , float y_hizi , float yaricap );
+    
+    Top(float x, float y);
     
     ~Top() = default;
 

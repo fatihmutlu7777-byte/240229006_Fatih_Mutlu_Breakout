@@ -1,42 +1,66 @@
 #include "oyun.hpp"
+using namespace sf;
 
+// Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır
 Oyun::Oyun() 
-    : m_window(sf::VideoMode(800, 600), "Breakout - Fatih Mutlu"),m_top(400.0f, 300.0f, 6.0f, 6.0f, 12.0f)
+    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f) // Topu ekranın ortasına koymuş olduk
 {
-    m_window.setFramerateLimit(60);
+    pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik
+
 }
 
-void Oyun::run() {
-    while (m_window.isOpen()) {
-        processEvents();
-        update();
-        render();
+void Oyun::calistir() {
+    // Oyunun ana döngüsü
+    while (pencere.isOpen()) {
+        olaylari_isle();
+        guncelle();
+        ciz();
     }
 }
 
-void Oyun::processEvents() {
-    sf::Event event;
-    while (m_window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)
-            m_window.close();
+void Oyun::olaylari_isle() {
+    sf::Event olay;
+    while (pencere.pollEvent(olay)) {
+        if (olay.type == sf::Event::Closed)
+            pencere.close();
     }
 }
 
-void Oyun::update() {
-    m_top.update();
+void Oyun::guncelle() {
+    // 1. Nesnelerin kendi hareketleri
+    topum.update();     // Topun ilerlemesi ve duvarlardan sekmesi gibi
+    raketim.guncelle(); // Topun hareketini günceller
 
-    // Duvar çarpışma kontrolleri
-    sf::FloatRect bounds = m_top.getBounds();
-    if (bounds.left < 0 || bounds.left + bounds.width > 800) {
-        m_top.carpma();
+    // 2. Çarpışma Kontrolü (Top raketten seksin mi?)
+    // Topun sınırları ile raketin sınırları kesişiyor mu bakıyoruz
+    if (topum.getBounds().intersects(raketim.getBounds())) {
+        topum.carpma_ust_alt(); // Bu işlem topu yukarı sektir
     }
-    if (bounds.top < 0 || bounds.top + bounds.height > 600) {
-        m_top.carpma_ust_alt();
+
+    // 3. Ekran Sınır Kontrolleri topumuz ekran arası ilişki
+    sf::FloatRect top_sinir = topum.getBounds();
+    
+    // Yan duvarlar
+    if (top_sinir.left < 0 || top_sinir.left + top_sinir.width > 800) {
+        topum.carpma();
+    }
+    
+    // Üst duvar
+    if (top_sinir.top < 0) {
+        topum.carpma_ust_alt();
+    }
+
+    // Alt duvar (Top yere düşerse - Şimdilik sadece sektiyor, sonra can azaltma eklenecek)
+    if (top_sinir.top + top_sinir.height > 600) {
+        topum.carpma_ust_alt(); 
     }
 }
 
-void Oyun::render() {
-    m_window.clear();
-    m_top.draw(m_window);
-    m_window.display();
+void Oyun::ciz() {
+    pencere.clear(); // Her karede ekranı temizle eski izler kalmasın diye
+
+    topum.draw(pencere);   // Topu çizer
+    raketim.ciz(pencere); // Raketi çizer
+
+    pencere.display(); // Çizilenleri ekrana yansıtır
 }

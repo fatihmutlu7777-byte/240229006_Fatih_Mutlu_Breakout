@@ -1,19 +1,19 @@
 #include "Top.hpp"
 
-Top::Top(float x, float y, float x_hizi, float y_hizi, float yaricap) 
-    : top_yarıcapi(yaricap) 
-{
-    top_hizi.x = x_hizi;
-    top_hizi.y = y_hizi;
-
-    top_sekli.setRadius(top_yarıcapi);
+Top::Top(float x, float y){
+    top_hizi_x = 0.0f;
+    top_hizi_y = 5.0f;
+    top_sekli.setRadius(5.0f);
     top_sekli.setOrigin(top_yarıcapi, top_yarıcapi); // Merkezi referans al
     top_sekli.setPosition(x, y);
     top_sekli.setFillColor(sf::Color::White);
 }
 
 void Top::update() {
-    top_sekli.move(top_hizi);
+    top_sekli.move(top_hizi_x,top_hizi_y);
+
+    
+    
 }
 
 void Top::draw(sf::RenderWindow& t_window) {
@@ -21,11 +21,18 @@ void Top::draw(sf::RenderWindow& t_window) {
 }
 
 void Top::carpma() {
-    top_hizi.x = -top_hizi.x;
+    if(top_sekli.getPosition().x<=0|| top_sekli.getPosition().x >= 800 - 20){
+       top_hizi_x=-top_hizi_x;
+
+    }
+    if(top_sekli.getPosition().y<=0){
+        top_hizi_y=-top_hizi_y;
+
+    }
 }
 
 void Top::carpma_ust_alt() {
-    top_hizi.y = -top_hizi.y;
+    top_hizi_y = -top_hizi_y;
 }
 
 sf::FloatRect Top::getBounds() const {

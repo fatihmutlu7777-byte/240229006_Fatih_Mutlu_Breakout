@@ -1,23 +1,30 @@
-#ifndef GAME_HPP
-#define GAME_HPP
-
+#ifndef OYUN_HPP
+#define OYUN_HPP
 #include <SFML/Graphics.hpp>
-#include "Top.hpp"
+#include "top.hpp"
+#include "raket.hpp" 
 
 class Oyun {
-
 private:
-    void processEvents();
-    void update();
-    void render();
+    // SFML Penceresi
+    sf::RenderWindow pencere;
+
+    // Oyunun Nesneleri 
+    Top topum;
+    Raket raketim;
+
+    // Özel yardımcı fonksiyonlar 
+    void olaylari_isle();
+    void guncelle();
+    void ciz();
 
 public:
+    // Yapıcı ve Yıkıcı Fonksiyonlar
     Oyun();
-    void run(); // Oyunun ana döngüsü burada döner
+    ~Oyun() = default;
 
-
-    sf::RenderWindow m_window;
-    Top m_top; // Top nesnesini burada tutuyoruz
+    // Oyunu başlatan ana döngü
+    void calistir();
 };
 
 #endif
