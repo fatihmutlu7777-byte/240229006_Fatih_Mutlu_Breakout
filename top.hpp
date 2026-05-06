@@ -19,7 +19,7 @@ public:
     ~Top() = default;
 
     void update();
-    void draw(sf::RenderWindow& t_window);
+    void ciz(sf::RenderWindow& t_window);
     void carpma();
     void carpma_ust_alt();
     sf::FloatRect getBounds() const;

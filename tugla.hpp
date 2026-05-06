@@ -21,7 +21,7 @@ class Tugla{
     ~Tugla() = default;
 
 
-    void ciz(sf::RenderWindow& pencere);
+    
 
 };
 

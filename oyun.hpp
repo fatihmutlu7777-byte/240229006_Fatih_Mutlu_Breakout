@@ -1,8 +1,12 @@
 #ifndef OYUN_HPP
 #define OYUN_HPP
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "top.hpp"
-#include "raket.hpp" 
+#include "raket.hpp"
+#include "tugla.hpp"
+
+
 
 class Oyun {
 private:
@@ -12,6 +16,8 @@ private:
     // Oyunun Nesneleri 
     Top topum;
     Raket raketim;
+    std::vector <Tugla> tuglalarim;
+
 
     // Özel yardımcı fonksiyonlar 
     void olaylari_isle();
