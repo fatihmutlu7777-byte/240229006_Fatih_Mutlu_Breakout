@@ -1,4 +1,4 @@
-#include "Top.hpp"
+#include "../include/Top.hpp"
 
 Top::Top(float x, float y){
     top_hizi_x = 5.0f;
@@ -15,6 +15,7 @@ void Top::update() {
     
     
 }
+
 
 void Top::ciz(sf::RenderWindow& pencere) {
     pencere.draw(top_sekli);

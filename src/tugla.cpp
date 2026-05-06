@@ -1,5 +1,5 @@
-#include"tugla.hpp"
-#include"top.hpp"
+#include"../include/tugla.hpp"
+#include"../include/top.hpp"
 
 
 Tugla::Tugla(float x,float y,float genişlik,float yukseklik,sf::Color renk){

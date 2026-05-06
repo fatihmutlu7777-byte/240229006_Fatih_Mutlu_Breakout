@@ -1,4 +1,4 @@
-#include "oyun.hpp"
+#include "../include/oyun.hpp"
 
 int main() {
     Oyun breakout;

@@ -1,4 +1,4 @@
-#include "oyun.hpp"
+#include "../include/oyun.hpp"
 using namespace sf;
 
 // Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır

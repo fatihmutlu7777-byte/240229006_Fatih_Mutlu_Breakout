@@ -2,9 +2,9 @@
 #define OYUN_HPP
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "top.hpp"
-#include "raket.hpp"
-#include "tugla.hpp"
+#include "../include/top.hpp"
+#include "../include/raket.hpp"
+#include "../include/tugla.hpp"
 
 
 
