@@ -9,11 +9,37 @@ Top::Top(float x, float y){
     top_sekli.setFillColor(sf::Color::White);
 }
 
-void Top::update() {
+void Top::guncelle() {
     top_sekli.move(top_hizi_x,top_hizi_y);
 
+    if(top_sekli.getPosition().x<=0|| top_sekli.getPosition().x >= 800 - 20){
+        top_hizi_x=-top_hizi_x;
+
+    }
+    if(top_sekli.getPosition().y<=0){
+        top_hizi_y=-top_hizi_y;
+
+    }
     
     
+}
+
+void Top::rakettensek(float raketMerkezi){
+    if(top_hizi_y>0){
+        top_hizi_y=-top_hizi_y; // Yukarı fırlatcak
+
+        if (top_hizi_y > -1.0f) { 
+            top_hizi_y = top_hizi_y * 1.03f; // Hızı %3 arttırdık
+        }
+
+        float TopMerkezi=top_sekli.getPosition().x + top_sekli.getRadius();
+
+
+        float fark=TopMerkezi-raketMerkezi;
+
+        top_hizi_x=fark*0.15f;
+    }
+
 }
 
 
@@ -22,6 +48,3 @@ void Top::ciz(sf::RenderWindow& pencere) {
 }
 
 
-sf::FloatRect Top::getBounds() const {
-    return top_sekli.getGlobalBounds();
-}

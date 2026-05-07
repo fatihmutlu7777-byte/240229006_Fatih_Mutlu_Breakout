@@ -34,7 +34,3 @@ void Raket::ciz(RenderWindow& pencere){
 
     pencere.draw(raketin_sekli);
 }
-
-sf::FloatRect Raket::getBounds() const {
-    return raketin_sekli.getGlobalBounds();
-}

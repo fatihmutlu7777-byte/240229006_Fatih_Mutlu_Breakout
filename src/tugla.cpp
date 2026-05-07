@@ -18,18 +18,9 @@ void Tugla::ciz(sf::RenderWindow& pencere){
     }
 }
 
-void Top::carpma(){
-    if(top_sekli.getPosition().x<=0|| top_sekli.getPosition().x >= 800 - 20){
-       top_hizi_x=-top_hizi_x;
 
-    }
-    if(top_sekli.getPosition().y<=0){
-        top_hizi_y=-top_hizi_y;
 
-    }
-}
-
-void Top::carpma_ust_alt(){
+void Top::tugladansek(){
       top_hizi_y = -top_hizi_y;
 
 }

@@ -71,45 +71,35 @@ void Oyun::olaylari_isle() {
 }
 
 void Oyun::guncelle() {
-    // 1. Nesnelerin kendi hareketleri
-    topum.update();     // Topun ilerlemesi ve duvarlardan sekmesi gibi
-    raketim.guncelle(); // Topun hareketini günceller
-
-    // 2. Çarpışma Kontrolü (Top raketten seksin mi?)
-    // Topun sınırları ile raketin sınırları kesişiyor mu bakıyoruz
-    if (topum.getBounds().intersects(raketim.getBounds())) {
-        topum.carpma_ust_alt(); // Bu işlem topu yukarı sektir
-    }
-
-    // 3. Ekran Sınır Kontrolleri topumuz ekran arası ilişki
-    sf::FloatRect top_sinir = topum.getBounds();
-    
-    // Yan duvarlar
-    if (top_sinir.left < 0 || top_sinir.left + top_sinir.width > 800) {
-        topum.carpma();
-    }
-    
-    // Üst duvar
-    if (top_sinir.top < 0) {
-        topum.carpma_ust_alt();
-    }
-
-    // Alt duvar (Top yere düşerse - Şimdilik sadece sektiyor, sonra can azaltma eklenecek)
-    if (top_sinir.top + top_sinir.height > 600) {
-        topum.carpma_ust_alt(); 
-    }
+   
 
 
-    for (auto& t : tuglalarim) {
+
+
+    raketim.guncelle();
+    topum.guncelle();
+
+
+     for (auto& t : tuglalarim) {
         
-        if(!t.kirildi_mi && topum.getBounds().intersects(t.getSinirlar())){ // Burda top tuğla sınırlarına çarpmışmı baılır eğer true dönerse aşağıda tuğlaları kaldırma işlemi olur ardından top -hız_y olur ve break yapıp döngüyü bitiririz yoksa sonsuz döngü olup hepsini silebilir
+        if(!t.kirildi_mi& topum.getSinirlar().intersects(t.getSinirlar())){ // Burda top tuğla sınırlarına çarpmışmı baılır eğer true dönerse aşağıda tuğlaları kaldırma işlemi olur ardından top -hız_y olur ve break yapıp döngüyü bitiririz yoksa sonsuz döngü olup hepsini silebilir
             t.kirildi_mi=true;
     
-        topum.carpma();
-        topum.carpma_ust_alt();
+        topum.tugladansek();
+        
         break;
-            }
+        }
+
+
+    if(topum.getSinirlar().intersects(raketim.getSinirlar())){ //Topun sınırı raketin sınırıyla kesiştimi demek
+       
+        float RaketMerkezi=raketim.getSinirlar().left +(raketim.getSinirlar().width / 2.0f); // 2 ye bölüyoz çünü merkezini eklicez x in başlangıcına böylece tam orta nokta bulcaz neden .left yaptık çünkü SFML de right yok left top width height var right yapıncada açılıyo çalışıyor ama hata veriyor neden burda yaptık burası yönetici topu değiştircez top.c++ da yapsam include lar ve fazla fonksyonlar gerekicekti bizde yöneticide yaptık ara işlemi ve değeri top.c++ a aktardık 
+        
+        topum.rakettensek(RaketMerkezi);// Merkeze göre nasıl sektiği merkez koordinatını veririz buna göre ne kadar sapma varsa -hız_x ona göre belirlenir sekmede
     }
+}
+
+
 }
 
 void Oyun::ciz(){
