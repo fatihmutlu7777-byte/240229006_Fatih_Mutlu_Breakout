@@ -3,7 +3,7 @@ using namespace sf;
 
 // Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır
 Oyun::Oyun() 
-    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f) // Topu ekranın ortasına koymuş olduk
+    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f),can(3) // Topu ekranın ortasına koymuş olduk
 {
     pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik
 
@@ -97,9 +97,27 @@ void Oyun::guncelle() {
         
         topum.rakettensek(RaketMerkezi);// Merkeze göre nasıl sektiği merkez koordinatını veririz buna göre ne kadar sapma varsa -hız_x ona göre belirlenir sekmede
     }
+
+    if(topum.getSinirlar().top>600.0f){
+        can--;
+        if(can>0){
+            konumları_sıfırla();
+
+        }
+        else{
+            pencere.close();
+        }
+    }
 }
 
 
+}
+
+
+
+void Oyun::konumları_sıfırla(){
+    topum.resetle(400.0f,450.0f);
+    raketim.resetle();
 }
 
 void Oyun::ciz(){

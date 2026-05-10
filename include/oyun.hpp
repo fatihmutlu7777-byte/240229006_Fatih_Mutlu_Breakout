@@ -17,13 +17,15 @@ private:
     Top topum;
     Raket raketim;
     std::vector <Tugla> tuglalarim;
+    int can;
 
 
     // Özel yardımcı fonksiyonlar 
+
     void olaylari_isle();
     void guncelle();
     void ciz();
-
+    void konumları_sıfırla();
 public:
     // Yapıcı ve Yıkıcı Fonksiyonlar
     Oyun();

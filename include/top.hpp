@@ -1,6 +1,5 @@
 #ifndef TOP_HPP
 #define TOP_HPP
-#include "top.hpp"
 
 #include <SFML/Graphics.hpp>
 
@@ -19,6 +18,7 @@ public:
     void ciz(sf::RenderWindow& t_window);
     void rakettensek(float raketMerkezi);
     void tugladansek();
+    void resetle(float x,float y);
 
     
     sf::FloatRect getSinirlar() {        

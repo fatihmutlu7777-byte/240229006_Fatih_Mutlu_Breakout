@@ -43,6 +43,13 @@ void Top::rakettensek(float raketMerkezi){
 }
 
 
+void Top::resetle(float x, float y){
+    top_sekli.setPosition(x,y);
+    top_hizi_x=0.0f;
+    top_hizi_y=-5.0f;
+}
+
+
 void Top::ciz(sf::RenderWindow& pencere) {
     pencere.draw(top_sekli);
 }

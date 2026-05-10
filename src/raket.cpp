@@ -30,6 +30,11 @@ void Raket::guncelle(){
 }
 
 
+void Raket::resetle(){
+    raketin_sekli.setPosition(350.0f, 550.0f);
+}
+
+
 void Raket::ciz(RenderWindow& pencere){
 
     pencere.draw(raketin_sekli);
