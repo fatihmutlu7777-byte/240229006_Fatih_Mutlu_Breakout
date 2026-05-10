@@ -4,9 +4,9 @@
 sf::Texture Tugla::catlak_dokusu;
 
 
-Tugla::Tugla(float x,float y,float genişlik,float yukseklik,sf::Color renk,int can){
-    dayaniklilik = can;       
-    baslangic_cani = can;
+Tugla::Tugla(float x,float y,float genişlik,float yukseklik,sf::Color renk,int tugla_cani){
+    dayaniklilik = tugla_cani;       
+    baslangic_cani = tugla_cani;
     tuglanin_sekli.setPosition(x,y);
     tuglanin_sekli.setSize(sf::Vector2f(genişlik,yukseklik));
     tuglanin_sekli.setFillColor(sf::Color::Yellow);
@@ -27,7 +27,7 @@ void Tugla::ciz(sf::RenderWindow& pencere){
             sf::Vector2u size = catlak_dokusu.getSize();
             catlakSprite.setOrigin(size.x / 2.0f, size.y / 2.0f);
 
-            // Konumu tuğlanın tam ortasına getir
+            // Konumu tuğlanın tam ortasına getir.
             catlakSprite.setPosition(
                 tuglanin_sekli.getPosition().x + tuglanin_sekli.getSize().x / 2.0f,
                 tuglanin_sekli.getPosition().y + tuglanin_sekli.getSize().y / 2.0f

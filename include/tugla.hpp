@@ -21,7 +21,7 @@ class Tugla{
 
     //Yapıcı fonksyonlar
 
-    Tugla(float x,float y,float genislik ,float yukseklik,sf::Color renk,int can);
+    Tugla(float x,float y,float genislik ,float yukseklik,sf::Color renk,int tugla_cani);
     void ciz(sf::RenderWindow& pencere);
     void darbe_al();
 

@@ -18,21 +18,31 @@ private:
     Raket raketim;
     std::vector <Tugla> tuglalarim;
     int can;
+    int skor;
+    bool oyun_bitti_mi;
+
+    sf::Font font;
+    sf::Text skor_metni;          // Büyük skor.
+    sf::Text anlik_skor_metni;     // Kalplerin altındaki küçük skor.
+    sf::Text bitis_metni;         // "OYUN BİTTİ" yazısı.
+    sf::Text yeniden_baslat_metni; // "E/H" seçim yazısı.
     sf::Texture kalp_logosu;
+    
 
 
-    // Özel yardımcı fonksiyonlar 
+    // Özel yardımcı fonksiyonlar. 
 
     void olaylari_isle();
     void guncelle();
     void ciz();
     void konumları_sıfırla();
+    void oyunu_sıfırla();
 public:
-    // Yapıcı ve Yıkıcı Fonksiyonlar
+    // Yapıcı ve Yıkıcı Fonksiyonlar.
     Oyun();
     ~Oyun() = default;
 
-    // Oyunu başlatan ana döngü
+    // Oyunu başlatan ana döngü.
     void calistir();
 };
 
