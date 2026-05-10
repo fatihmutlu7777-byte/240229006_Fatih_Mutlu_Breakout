@@ -18,6 +18,7 @@ private:
     Raket raketim;
     std::vector <Tugla> tuglalarim;
     int can;
+    sf::Texture kalp_logosu;
 
 
     // Özel yardımcı fonksiyonlar 

@@ -7,6 +7,10 @@ Oyun::Oyun()
 {
     pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik
 
+    // Başındaki ../ kısmını sildik, doğrudan assets içinden alıyoruz
+    if (!kalp_logosu.loadFromFile("../assets/kalp.png")) {
+        // Hata durumu için program çökmesin diye.
+    }
 
     // 8 farklı küme için 2x4'lük bir renk matrisi oluşturuyoruz
 sf::Color kumeRenkleri[2][4] = {
@@ -133,6 +137,21 @@ void Oyun::ciz(){
         }
     }
     
+    sf::Sprite gecici_kalp;
+    gecici_kalp.setTexture(kalp_logosu);
+
+    gecici_kalp.setScale(0.05f, 0.05f);
+
+    float baslangicX = 10.0f; // Sol kenardan boşluk
+    float baslangicY = 10.0f; // Üst kenardan boşluk
+    float boslukMiktari = 35.0f; // İki kalbin merkezi arasındaki mesafe.
+
+    for (int i = 0; i < can; i++) {
+        // Her kalbi x ekseninde 40 pixel yan yana koyduk.
+       
+        gecici_kalp.setPosition(baslangicX + (i * boslukMiktari), baslangicY);
+        pencere.draw(gecici_kalp); 
+    }
 
     pencere.display(); // Çizilenleri ekrana yansıtır
 }

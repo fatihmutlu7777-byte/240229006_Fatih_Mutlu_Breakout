@@ -3,7 +3,8 @@
 Top::Top(float x, float y){
     top_hizi_x = 5.0f;
     top_hizi_y = 5.0f;
-    top_sekli.setRadius(5.0f);
+    top_yarıcapi = 5.0f;
+    top_sekli.setRadius(top_yarıcapi);
     top_sekli.setOrigin(top_yarıcapi, top_yarıcapi); // Merkezi referans al
     top_sekli.setPosition(x, y);
     top_sekli.setFillColor(sf::Color::White);
