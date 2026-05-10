@@ -1,7 +1,7 @@
 #include "../include/Top.hpp"
 
 Top::Top(float x, float y){
-    top_hizi_x = 5.0f;
+    top_hizi_x = 0.0f;
     top_hizi_y = 5.0f;
     top_yarıcapi = 5.0f;
     top_sekli.setRadius(top_yarıcapi);
@@ -44,8 +44,8 @@ void Top::rakettensek(float raketMerkezi){
 }
 
 
-void Top::resetle(float x, float y){
-    top_sekli.setPosition(x,y);
+void Top::resetle_top(){
+    top_sekli.setPosition(400.0f,300.0f);
     top_hizi_x=0.0f;
     top_hizi_y=-5.0f;
 }

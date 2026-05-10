@@ -18,7 +18,7 @@ public:
     void ciz(sf::RenderWindow& t_window);
     void rakettensek(float raketMerkezi);
     void tugladansek();
-    void resetle(float x,float y);
+    void resetle_top();
 
     
     sf::FloatRect getSinirlar() {        

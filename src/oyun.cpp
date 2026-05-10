@@ -1,15 +1,25 @@
 #include "../include/oyun.hpp"
+#include <ctime>
 using namespace sf;
+
+
+
 
 // Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır
 Oyun::Oyun() 
     : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f),can(3) // Topu ekranın ortasına koymuş olduk
 {
     pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik
+    srand(static_cast<unsigned>(time(0)));//Bize kırık şekillerinde random değerler vermesi için.
+
 
     // Başındaki ../ kısmını sildik, doğrudan assets içinden alıyoruz
     if (!kalp_logosu.loadFromFile("../assets/kalp.png")) {
         // Hata durumu için program çökmesin diye.
+    }
+    if (!Tugla::catlak_dokusu.loadFromFile("../assets/catlak.png")) {
+                // Hata durumu için program çökmesin diye.
+
     }
 
     // 8 farklı küme için 2x4'lük bir renk matrisi oluşturuyoruz
@@ -48,10 +58,17 @@ for (int i = 0; i < 8; i++) {
         
         // Matristen ilgili rengi seç
         sf::Color gecerliRenk = kumeRenkleri[kumeSatiri][kumeSutunu];
+        int tugla_cani;
+        if(i<4){
+            tugla_cani=2;
+        }
+        else{
+            tugla_cani=1;
+        }
 
         // 6. TUĞLAYI OLUŞTUR VE LİSTEYE EKLE (Rengi parametre olarak yolluyoruz)
 
-        tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, 20.0f, 20.0f, gecerliRenk)); 
+        tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, 20.0f, 20.0f, gecerliRenk,can)); 
     }
 }
 
@@ -87,7 +104,8 @@ void Oyun::guncelle() {
      for (auto& t : tuglalarim) {
         
         if(!t.kirildi_mi& topum.getSinirlar().intersects(t.getSinirlar())){ // Burda top tuğla sınırlarına çarpmışmı baılır eğer true dönerse aşağıda tuğlaları kaldırma işlemi olur ardından top -hız_y olur ve break yapıp döngüyü bitiririz yoksa sonsuz döngü olup hepsini silebilir
-            t.kirildi_mi=true;
+            t.darbe_al();
+
     
         topum.tugladansek();
         
@@ -120,8 +138,8 @@ void Oyun::guncelle() {
 
 
 void Oyun::konumları_sıfırla(){
-    topum.resetle(400.0f,450.0f);
-    raketim.resetle();
+    topum.resetle_top();
+    raketim.resetle_raket();
 }
 
 void Oyun::ciz(){

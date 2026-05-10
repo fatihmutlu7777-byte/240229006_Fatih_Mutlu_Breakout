@@ -17,7 +17,7 @@ public:
     
     void guncelle();
     void ciz(sf::RenderWindow& pencere);
-    void resetle();
+    void resetle_raket();
     
     sf::FloatRect getSinirlar() { 
     return raketin_sekli.getGlobalBounds(); 

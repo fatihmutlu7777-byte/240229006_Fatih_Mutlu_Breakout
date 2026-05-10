@@ -30,7 +30,7 @@ void Raket::guncelle(){
 }
 
 
-void Raket::resetle(){
+void Raket::resetle_raket(){
     raketin_sekli.setPosition(350.0f, 550.0f);
 }
 
