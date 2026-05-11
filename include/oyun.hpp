@@ -23,11 +23,13 @@ private:
     Oyun_sonu oyunsonu_ekranim;
     Skor_ekrani skor_ekranim;
     std::vector <Tugla> tuglalarim;
+    sf::Texture kalp_logosu;
+    sf::Font font;
     int can;
     int skor;
     bool oyun_bitti_mi;
-    sf::Texture kalp_logosu;
-    sf::Font font;
+    int mevcut_seviye;
+    
     
 
 
@@ -38,6 +40,9 @@ private:
     void ciz();
     void konumları_sıfırla();
     void oyunu_sıfırla();
+    void tuglalari_diz();
+    void yeni_seviye_yukle();
+    
 public:
     // Yapıcı ve Yıkıcı Fonksiyonlar.
     Oyun();

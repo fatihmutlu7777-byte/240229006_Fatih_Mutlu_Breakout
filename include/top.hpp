@@ -19,6 +19,7 @@ public:
     void rakettensek(float raketMerkezi);
     void tugladansek();
     void resetle_top();
+    void hiz_arttir(float carpan);
 
     
     sf::FloatRect getSinirlar() {        

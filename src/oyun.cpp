@@ -7,7 +7,7 @@ using namespace sf;
 
 // Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır.
 Oyun::Oyun() 
-    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(15.f,30.f)// Topu ekranın ortasına koymuş olduk.
+    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),mevcut_seviye(1),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(15.f,30.f)// Topu ekranın ortasına koymuş olduk.
 {
     pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik.
     srand(static_cast<unsigned>(time(0)));//Bize kırık şekillerinde random değerler vermesi için.
@@ -28,9 +28,16 @@ Oyun::Oyun()
         
     }
 
+    tuglalari_diz();
+
+   
+}
 
 
-    // 8 farklı küme için 2x4'lük bir renk matrisi oluşturuyoruz.
+
+
+void Oyun::tuglalari_diz(){
+     // 8 farklı küme için 2x4'lük bir renk matrisi oluşturuyoruz.
 sf::Color kumeRenkleri[2][4] = {
     {sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta, sf::Color::Cyan},
     {sf::Color(163,66,86), sf::Color(255, 165, 0), sf::Color(0,153,76), sf::Color(255, 0, 0)},
@@ -95,6 +102,15 @@ for (int i = 0; i < 9; i++) {
 }
 
 
+void Oyun::yeni_seviye_yukle(){
+    mevcut_seviye++;
+    konumları_sıfırla();
+    tuglalari_diz();
+    topum.hiz_arttir(1.1f);
+
+   
+}
+
 
 void Oyun::calistir() {
     // Oyunun ana döngüsü.
@@ -143,6 +159,19 @@ void Oyun::guncelle() {
             break; 
         }
     }
+
+    bool seviye_bitti_mi=true;
+    for (auto& t : tuglalarim) {
+        if (t.baslangic_cani != -1 && !t.kirildi_mi) { // Bütün tuğlalar kırıldımı diye kontrol ama en alttaki kırılmaz tuğlaları görmezden geliyoruz.
+            seviye_bitti_mi = false; 
+            break; 
+        }
+    }
+
+    if(seviye_bitti_mi){
+        yeni_seviye_yukle();
+    }
+
         
     if(topum.getSinirlar().intersects(raketim.getSinirlar())){ //Topun sınırı raketin sınırıyla kesiştimi demek.
        
@@ -213,8 +242,10 @@ void Oyun::ciz(){
 void Oyun::oyunu_sıfırla(){
     can=3;
     skor=0;
+    mevcut_seviye=1;
     skor_ekranim.skoru_sifirla();
     konumları_sıfırla();
+    tuglalari_diz();
     oyun_bitti_mi=false;
 
 
