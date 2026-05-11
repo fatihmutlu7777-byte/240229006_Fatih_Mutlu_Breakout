@@ -11,7 +11,7 @@ Skor_ekrani::Skor_ekrani(float x, float y){
     }
 
     yazi.setFont(font);
-    yazi.setCharacterSize(24);
+    yazi.setCharacterSize(22);
     yazi.setFillColor(Color::White);
     yazi.setPosition(x,y);
     yazi.setString("skor: 0");

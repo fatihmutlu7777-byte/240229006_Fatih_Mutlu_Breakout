@@ -7,7 +7,7 @@ using namespace sf;
 
 // Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır.
 Oyun::Oyun() 
-    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(20.f,20.f)// Topu ekranın ortasına koymuş olduk.
+    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(15.f,30.f)// Topu ekranın ortasına koymuş olduk.
 {
     pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik.
     srand(static_cast<unsigned>(time(0)));//Bize kırık şekillerinde random değerler vermesi için.
@@ -38,7 +38,7 @@ sf::Color kumeRenkleri[2][4] = {
 };
 
 // Toplam 8 satır ve 20 sütunluk döngü.
-for (int i = 0; i < 8; i++) { 
+for (int i = 0; i < 9; i++) { 
         for (int j = 0; j < 20; j++) { 
             float xPozisyonu = (j * 25.0f) + 92.5f; 
             float yPozisyonu = (i * 25.0f) + 50.0f; 
@@ -48,13 +48,24 @@ for (int i = 0; i < 8; i++) {
             if (j >= 15) xPozisyonu += 40.0f; 
             if (i >= 4) yPozisyonu += 40.0f; 
 
+
+            int tugla_cani;
+            sf::Color gecerliRenk;
+            if(i==8){
+                gecerliRenk=sf::Color(128, 128, 128);
+                tugla_cani=-1;
+            }
+            else{
+
+
             int kumeSatiri = i / 4; 
             int kumeSutunu = j / 5; 
-            sf::Color gecerliRenk = kumeRenkleri[kumeSatiri][kumeSutunu];
+            gecerliRenk = kumeRenkleri[kumeSatiri][kumeSutunu];
 
            
             int satir_ıd_x = i % 4; //Satırları bulduk.
-            int tugla_cani;
+
+
             if (satir_ıd_x == 3){
                 tugla_cani = 1; // En alt: 1 vuruş.
             }
@@ -69,7 +80,16 @@ for (int i = 0; i < 8; i++) {
                 tugla_cani = 4; // En üst: 4 vuruş
             }
 
+        
+            }
+
+            if(i!=8){
             tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, 20.0f, 20.0f, gecerliRenk, tugla_cani));
+            }
+            else{
+            tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, 20.0f, 10.0f, gecerliRenk, tugla_cani));
+
+            }
         }
     }
 }
@@ -113,10 +133,12 @@ void Oyun::guncelle() {
 
      for (auto& t : tuglalarim) {
         if (!t.kirildi_mi && topum.getSinirlar().intersects(t.getSinirlar())) {
+            if(t.baslangic_cani!=-1){
             t.darbe_al();
             if (t.kirildi_mi) {
                 skor_ekranim.skor_ekle(1);
             }
+        }
             topum.tugladansek();
             break; 
         }
