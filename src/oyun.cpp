@@ -50,6 +50,8 @@ for (int i = 0; i < 1; i++) { // Oyun test aşamasında olduğu için 1 olarak g
             float xPozisyonu = (j * 25.0f) + 92.5f; 
             float yPozisyonu = (i * 25.0f) + 50.0f; 
 
+
+            
             if (j >= 5) xPozisyonu += 40.0f; 
             if (j >= 10) xPozisyonu += 40.0f; 
             if (j >= 15) xPozisyonu += 40.0f; 
