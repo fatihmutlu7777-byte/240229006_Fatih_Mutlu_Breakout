@@ -13,11 +13,13 @@ class Oyun_sonu{
     Text baslik_metni;
     Text skor_metni;
     Text bilgi_metni;
+    Text seviye_metni;
 
     public:
 
     Oyun_sonu(float x,float y);
     void skoru_ayarla(int son_skor);
+    void seviyeyi_ayarla(int son_seviye);
     void ciz(RenderWindow& pencere);
     
 

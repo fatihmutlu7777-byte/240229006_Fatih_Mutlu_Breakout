@@ -7,7 +7,7 @@ using namespace sf;
 
 // Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır.
 Oyun::Oyun() 
-    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),mevcut_seviye(1),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(15.f,30.f)// Topu ekranın ortasına koymuş olduk.
+    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),mevcut_seviye(1),seviye_ekranim(15.0f,50.0f),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(15.f,30.f)// Topu ekranın ortasına koymuş olduk.
 {
     pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik.
     srand(static_cast<unsigned>(time(0)));//Bize kırık şekillerinde random değerler vermesi için.
@@ -45,8 +45,8 @@ sf::Color kumeRenkleri[2][4] = {
 };
 
 // Toplam 8 satır ve 20 sütunluk döngü.
-for (int i = 0; i < 9; i++) { 
-        for (int j = 0; j < 20; j++) { 
+for (int i = 0; i < 1; i++) { // Oyun test aşamasında olduğu için 1 olarak güncellenci çalışmalar bitince 9 olacak. 
+        for (int j = 0; j < 2; j++) { // Oyun test aşamasında olduğu için 2 olarak güncellenci çalışmalar bitince 20 olacak. 
             float xPozisyonu = (j * 25.0f) + 92.5f; 
             float yPozisyonu = (i * 25.0f) + 50.0f; 
 
@@ -169,6 +169,7 @@ void Oyun::guncelle() {
     }
 
     if(seviye_bitti_mi){
+        seviye_ekranim.skor_ekle(1);
         yeni_seviye_yukle();
     }
 
@@ -185,6 +186,8 @@ void Oyun::guncelle() {
         if(can <= 0){
             oyun_bitti_mi = true;
             oyunsonu_ekranim.skoru_ayarla(skor_ekranim.getskor());
+            oyunsonu_ekranim.seviyeyi_ayarla(seviye_ekranim.getseviye());
+
         } else {
             konumları_sıfırla();
         }
@@ -229,6 +232,7 @@ void Oyun::ciz(){
     }
 
     skor_ekranim.ciz(pencere);
+    seviye_ekranim.ciz(pencere);
 
     if(oyun_bitti_mi){
         oyunsonu_ekranim.ciz(pencere);
@@ -244,6 +248,7 @@ void Oyun::oyunu_sıfırla(){
     skor=0;
     mevcut_seviye=1;
     skor_ekranim.skoru_sifirla();
+    seviye_ekranim.seviyeyi_sifirla();
     konumları_sıfırla();
     tuglalari_diz();
     oyun_bitti_mi=false;

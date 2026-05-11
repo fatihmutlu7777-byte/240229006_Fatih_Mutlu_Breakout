@@ -15,6 +15,8 @@ set(SOURCES
     src/tugla.cpp
     src/oyunsonu.cpp
     src/skor.cpp
+    src/seviye.cpp
+
 )
 
 # SFML'i bulur.

@@ -7,6 +7,8 @@
 #include "../include/tugla.hpp"
 #include "../include/oyunsonu.hpp"
 #include "../include/skor.hpp"
+#include "../include/seviye.hpp"
+
 
 
 
@@ -22,6 +24,7 @@ private:
     Raket raketim;
     Oyun_sonu oyunsonu_ekranim;
     Skor_ekrani skor_ekranim;
+    Seviye_ekrani seviye_ekranim;
     std::vector <Tugla> tuglalarim;
     sf::Texture kalp_logosu;
     sf::Font font;
@@ -42,7 +45,7 @@ private:
     void oyunu_sıfırla();
     void tuglalari_diz();
     void yeni_seviye_yukle();
-    
+
 public:
     // Yapıcı ve Yıkıcı Fonksiyonlar.
     Oyun();
