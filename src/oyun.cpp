@@ -7,7 +7,7 @@ using namespace sf;
 
 // Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır.
 Oyun::Oyun() 
-    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false)// Topu ekranın ortasına koymuş olduk.
+    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(20.f,20.f)// Topu ekranın ortasına koymuş olduk.
 {
     pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik.
     srand(static_cast<unsigned>(time(0)));//Bize kırık şekillerinde random değerler vermesi için.
@@ -29,18 +29,6 @@ Oyun::Oyun()
     }
 
 
-    bitis_metni.setFont(font);
-    bitis_metni.setCharacterSize(40);
-    bitis_metni.setFillColor(sf::Color::Red);   
-    bitis_metni.setPosition(200, 250);
-
-    yeniden_baslat_metni.setFont(font);
-    yeniden_baslat_metni.setCharacterSize(20);
-    yeniden_baslat_metni.setPosition(150, 350);
-
-   anlik_skor_metni.setFont(font);
-   anlik_skor_metni.setCharacterSize(18);
-   anlik_skor_metni.setPosition(10, 50);
 
     // 8 farklı küme için 2x4'lük bir renk matrisi oluşturuyoruz.
 sf::Color kumeRenkleri[2][4] = {
@@ -104,9 +92,9 @@ void Oyun::olaylari_isle(){
 
         // Kullanıcıdan isteyecek.
         if (oyun_bitti_mi && olay.type == sf::Event::KeyPressed) {
-            if (olay.key.code == sf::Keyboard::E) {
+            if (olay.key.code == sf::Keyboard::Enter) {
                 oyunu_sıfırla(); 
-            } else if (olay.key.code == sf::Keyboard::H) {
+            } else if (olay.key.code == sf::Keyboard::Escape) {
                 pencere.close();
             }
         }
@@ -127,7 +115,7 @@ void Oyun::guncelle() {
         if (!t.kirildi_mi && topum.getSinirlar().intersects(t.getSinirlar())) {
             t.darbe_al();
             if (t.kirildi_mi) {
-                skor += 10;
+                skor_ekranim.skor_ekle(1);
             }
             topum.tugladansek();
             break; 
@@ -145,6 +133,7 @@ void Oyun::guncelle() {
         can--; 
         if(can <= 0){
             oyun_bitti_mi = true;
+            oyunsonu_ekranim.skoru_ayarla(skor_ekranim.getskor());
         } else {
             konumları_sıfırla();
         }
@@ -177,8 +166,7 @@ void Oyun::ciz(){
             t.ciz(pencere);
         }
     }
-    anlik_skor_metni.setString("Puan: " + std::to_string(skor));
-        pencere.draw(anlik_skor_metni);
+   
     
     for (int i = 0; i < can; i++) {
             sf::Sprite gecici_kalp;
@@ -187,15 +175,14 @@ void Oyun::ciz(){
             gecici_kalp.setPosition(10.0f + (i * 35.0f), 10.0f);
             pencere.draw(gecici_kalp); 
         }
-    } else {
-        bitis_metni.setString("OYUN BITTI!\nToplam Skor: " + std::to_string(skor));
-        pencere.draw(bitis_metni);
-
-        yeniden_baslat_metni.setString("Tekrar oynamak icin 'E', cikmak icin 'H' basiniz.");
-        pencere.draw(yeniden_baslat_metni);
-        
     }
-    
+
+    skor_ekranim.ciz(pencere);
+
+    if(oyun_bitti_mi){
+        oyunsonu_ekranim.ciz(pencere);
+
+    }
     pencere.display(); // Çizilenleri ekrana yansıtır.
 }
 
@@ -204,6 +191,7 @@ void Oyun::ciz(){
 void Oyun::oyunu_sıfırla(){
     can=3;
     skor=0;
+    skor_ekranim.skoru_sifirla();
     konumları_sıfırla();
     oyun_bitti_mi=false;
 

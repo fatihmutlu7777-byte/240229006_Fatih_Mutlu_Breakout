@@ -5,6 +5,10 @@
 #include "../include/top.hpp"
 #include "../include/raket.hpp"
 #include "../include/tugla.hpp"
+#include "../include/oyunsonu.hpp"
+#include "../include/skor.hpp"
+
+
 
 
 
@@ -16,17 +20,14 @@ private:
     // Oyunun Nesneleri 
     Top topum;
     Raket raketim;
+    Oyun_sonu oyunsonu_ekranim;
+    Skor_ekrani skor_ekranim;
     std::vector <Tugla> tuglalarim;
     int can;
     int skor;
     bool oyun_bitti_mi;
-
-    sf::Font font;
-    sf::Text skor_metni;          // Büyük skor.
-    sf::Text anlik_skor_metni;     // Kalplerin altındaki küçük skor.
-    sf::Text bitis_metni;         // "OYUN BİTTİ" yazısı.
-    sf::Text yeniden_baslat_metni; // "E/H" seçim yazısı.
     sf::Texture kalp_logosu;
+    sf::Font font;
     
 
 

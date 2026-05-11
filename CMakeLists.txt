@@ -13,6 +13,8 @@ set(SOURCES
     src/top.cpp 
     src/raket.cpp 
     src/tugla.cpp
+    src/oyunsonu.cpp
+    src/skor.cpp
 )
 
 # SFML'i bulur.

@@ -47,7 +47,7 @@ void Top::rakettensek(float raketMerkezi){
 void Top::resetle_top(){
     top_sekli.setPosition(400.0f,300.0f);
     top_hizi_x=0.0f;
-    top_hizi_y=-5.0f;
+    top_hizi_y=5.0f;
 }
 
 
