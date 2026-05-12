@@ -3,6 +3,7 @@ using namespace std;
 
 
 Seviye_ekrani::Seviye_ekrani(float x, float y){
+    seviye=1;
     if (!font.loadFromFile("../assets/arial.ttf")) {
 
         // Hata durumu için program çökmesin diye.
@@ -12,11 +13,11 @@ Seviye_ekrani::Seviye_ekrani(float x, float y){
     yazi.setCharacterSize(18);
     yazi.setFillColor(Color::White);
     yazi.setPosition(x,y);
-    yazi.setString("Seviye: 0");
+    yazi.setString("Seviye: 1");
 }
 
 
-void Seviye_ekrani::skor_ekle(int sonraki_seviye){
+void Seviye_ekrani::seviye_ekle(int sonraki_seviye){
     seviye+=sonraki_seviye;
      yazi.setString("Seviye: "+::to_string(seviye));
 }
@@ -30,8 +31,8 @@ int Seviye_ekrani::getseviye(){
 
 
 void Seviye_ekrani::seviyeyi_sifirla(){
-    seviye=0;
-    yazi.setString("seviye: 0");
+    seviye=1;
+    yazi.setString("seviye: 1");
 
 }
 

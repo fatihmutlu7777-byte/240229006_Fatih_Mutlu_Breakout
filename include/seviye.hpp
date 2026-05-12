@@ -14,7 +14,7 @@ class Seviye_ekrani{
 
     public:
     Seviye_ekrani(float x ,float y);
-    void skor_ekle(int sonraki_seviye);
+    void seviye_ekle(int sonraki_seviye);
     void seviyeyi_sifirla();
     int getseviye();
     void ciz(RenderWindow& pencere);

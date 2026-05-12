@@ -31,7 +31,7 @@ private:
     int can;
     int skor;
     bool oyun_bitti_mi;
-    int mevcut_seviye;
+   
     
     
 
