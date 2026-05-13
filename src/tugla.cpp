@@ -16,31 +16,69 @@ Tugla::Tugla(float x,float y,float genişlik,float yukseklik,sf::Color renk,int 
 
 }
 
+
+
+
 void Tugla::ciz(sf::RenderWindow& pencere){
     if(!kirildi_mi){
         pencere.draw(tuglanin_sekli);
 
-        if (dayaniklilik < baslangic_cani) {
+        //Eğer tuğla kırılmaz değilse ve hasar aldıysa çatlakları çizer.
+        if (baslangic_cani != -1 && dayaniklilik < baslangic_cani) {
+            
+            // Tuğlanın kaç kere vurulduğunu hesaplıyoruz.
+            int alinan_hasar = baslangic_cani - dayaniklilik;
+
             sf::Sprite catlakSprite;
             catlakSprite.setTexture(catlak_dokusu);
 
             sf::Vector2u size = catlak_dokusu.getSize();
             catlakSprite.setOrigin(size.x / 2.0f, size.y / 2.0f);
 
-            // Konumu tuğlanın tam ortasına getir.
+            // Çatlağı tuğlanın tam merkezine oturtur.
             catlakSprite.setPosition(
                 tuglanin_sekli.getPosition().x + tuglanin_sekli.getSize().x / 2.0f,
                 tuglanin_sekli.getPosition().y + tuglanin_sekli.getSize().y / 2.0f
             );
-            // ÖLÇEKLENDİRME VE RASTGELELİK
-            float sX = (tuglanin_sekli.getSize().x / size.x) * catlak_yon_x;
-            float sY = tuglanin_sekli.getSize().y / size.y;
-            catlakSprite.setScale(sX, sY);
-            catlakSprite.setRotation(catlak_acisi);
-            pencere.draw(catlakSprite);
+
+            // Matematiksel Hesaplamalarımız.
+            float brick_w = tuglanin_sekli.getSize().x;
+            float brick_h = tuglanin_sekli.getSize().y;
+            float tex_w = size.x;
+            float tex_h = size.y;
+
+           
+            // KATMAN KATMAN HASAR EFEKTLERİ (ÜST ÜSTE BİNER)
+           
+
+            // 1. VURUŞ: DİKEY ÇATLAK
+            if (alinan_hasar >= 1) {
+                catlakSprite.setRotation(0); 
+                // Normal ölçekleme: Tuğlanın boyuna ve enine tam uydururuz.
+                catlakSprite.setScale(brick_w / tex_w, brick_h / tex_h);
+                pencere.draw(catlakSprite);
+            }
+
+            // 2. VURUŞ: YATAY ÇATLAK (Dikeyin Üstüne Eklenir)
+            if (alinan_hasar >= 2) {
+                catlakSprite.setRotation(90); 
+                //Resim 90 derece döndüğü için X ve Y ölçeklerini ters çeviririz.
+                // Böylece resim yan yattığında bile tuğlanın o daracık yüksekliğinden dışarı taşmaz.
+                catlakSprite.setScale(brick_h / tex_w, brick_w / tex_h);
+                pencere.draw(catlakSprite);
+            }
+
+            // 3. VURUŞ: TERS ÇATLAK (Her ikisinin de üstüne eklenip paramparça yapar)
+            if (alinan_hasar >= 3) {
+                catlakSprite.setRotation(180); 
+                // Sadece X eksenine eksi (-) vererek aynalama yapıyoruz görüntü iyice karışıp gerçekçi oluyor.
+                catlakSprite.setScale(-brick_w / tex_w, brick_h / tex_h);
+                pencere.draw(catlakSprite);
+            }
         }
     }
 }
+
 
 
 void Top::tugladansek(){
