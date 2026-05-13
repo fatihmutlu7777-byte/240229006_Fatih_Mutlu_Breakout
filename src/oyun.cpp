@@ -7,7 +7,7 @@ using namespace sf;
 
 // Yapıcı Fonksiyon: Pencereyi açar ve başlangıç ayarlarını yapar başlangıçta direk verdiğimiz değerlerde oluşsun diye ':' şeklinde yaparız '{}' yapmak yerine performansı arttırır.
 Oyun::Oyun() 
-    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),seviye_ekranim(15.0f,50.0f),topum(400.0f, 450.0f),can(3),skor(0),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(15.f,30.f)// Topu ekranın ortasına koymuş olduk.
+    : pencere(VideoMode(800.0f, 600.0f), "Breakout - Fatih Mutlu"),seviye_ekranim(15.0f,50.0f),topum(400.0f, 450.0f),can(3),oyun_bitti_mi(false),oyunsonu_ekranim(400.0f,300.0f),skor_ekranim(15.f,30.f)// Topu ekranın ortasına koymuş olduk.
 {
     pencere.setFramerateLimit(60); // Oyunun çok hızlı akmaması için 60 FPS'e sabitledik.
     srand(static_cast<unsigned>(time(0)));//Bize kırık şekillerinde random değerler vermesi için.
@@ -36,77 +36,109 @@ Oyun::Oyun()
 
 
 
-void Oyun::tuglalari_diz(){
 
-    tuglalarim.clear();
-     // 8 farklı küme için 2x4'lük bir renk matrisi oluşturuyoruz.
-sf::Color kumeRenkleri[2][4] = {
-    {sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta, sf::Color::Cyan},
-    {sf::Color(163,66,86), sf::Color(255, 165, 0), sf::Color(0,153,76), sf::Color(255, 0, 0)},
+
+void Oyun::tuglalari_diz() {
+    tuglalarim.clear(); 
+
+    int anlik_seviye = seviye_ekranim.getseviye();
+
+   
+    // %100 TEKRARSIZ "ASAL SAYI HASH" MOTORU 
     
-};
+    
+    
+    // 83 asal sayısı ile seviyeyi çarpıp 144'e bölüyoruz. 
+    // Bu bize 0 ile 143 arasında rastgele görünen ama asla tekrar etmeyen bir 'id' verir.
+    int id = (anlik_seviye * 83) % 144; 
 
-// Toplam 8 satır ve 20 sütunluk döngü.
-for (int i = 0; i < 1; i++) { // Oyun test aşamasında olduğu için 1 olarak güncellenci çalışmalar bitince 9 olacak. 
-        for (int j = 0; j < 2; j++) { // Oyun test aşamasında olduğu için 2 olarak güncellenci çalışmalar bitince 20 olacak. 
-            float xPozisyonu = (j * 25.0f) + 92.5f; 
-            float yPozisyonu = (i * 25.0f) + 50.0f; 
+    // O id'yi parçalayıp haritamızın özelliklerini belirliyoruz:
+    int ana_desen  = id % 8;                 // 8 farklı şekil
+    int p1         = (id / 8) % 3 + 1;       // 1, 2 veya 3 çarpanı
+    int p2         = (id / 24) % 3;          // 0, 1 veya 2 kayma mesafesi
+    bool ters_cevir= (id / 72) % 2 == 0;     // Düz mü, ters mi?
 
+    // Renklerimiz
+    sf::Color satirRenkleri[5] = {
+        sf::Color::Red, sf::Color(255, 165, 0), sf::Color::Yellow, 
+        sf::Color::Green, sf::Color::Cyan
+    };
 
+    for (int i = 0; i <= 5; i++) { 
+        for (int j = 0; j < 10; j++) { 
+
+            // 1. BOŞLUK VE KAPI ALGORİTMASI
+            if (i == 5) {
+                // Taktiksel Koridorumuz 
+                if (j >= 3 && j <= 6) continue; 
+            } 
+            else {
+                bool bosluk_koy = false;
+                
+                int j_simetrik = (j < 5) ? j : 9 - j; 
+                int i_hesap = ters_cevir ? (4 - i) : i;
+
+                // Seçilen benzersiz parametrelerle harita çizimi:
+                switch (ana_desen) {
+                    case 0: 
+                        if ((i_hesap + j_simetrik) % (p1 + 1) == p2) bosluk_koy = true;
+                        break;
+                    case 1: 
+                        if (i_hesap % p1 == p2) bosluk_koy = true;
+                        break;
+                    case 2: 
+                        if (j_simetrik % p1 == p2) bosluk_koy = true;
+                        break;
+                    case 3: 
+                        if (i_hesap > j_simetrik + p2) bosluk_koy = true;
+                        break;
+                    case 4: 
+                        if (i_hesap + j_simetrik < 3 + p2) bosluk_koy = true;
+                        break;
+                    case 5: 
+                        if (abs(i_hesap - j_simetrik) > p1 && abs(i_hesap + j_simetrik - 4) > p1) bosluk_koy = true;
+                        break;
+                    case 6: 
+                        if (abs(i_hesap - 2) + abs(j_simetrik - 2) <= p1) bosluk_koy = true;
+                        break;
+                    case 7: 
+                        if ((i_hesap - j_simetrik + 5) % (p1 + 1) == p2) bosluk_koy = true;
+                        break;
+                }
+
+                if (bosluk_koy) continue; 
+            }
+
+            // 2. KOORDİNAT HESAPLAMALARI
+            float tugla_genislik = 60.0f;
+            float tugla_yukseklik = 20.0f;
             
-            if (j >= 5) xPozisyonu += 40.0f; 
-            if (j >= 10) xPozisyonu += 40.0f; 
-            if (j >= 15) xPozisyonu += 40.0f; 
-            if (i >= 4) yPozisyonu += 40.0f; 
+            float xPozisyonu = 55.0f + (j * 70.0f); 
+            float yPozisyonu = 80.0f + (i * 35.0f); 
 
-
-            int tugla_cani;
-            sf::Color gecerliRenk;
-            if(i==8){
-                gecerliRenk=sf::Color(128, 128, 128);
-                tugla_cani=-1;
+            // 3. RENK VE CAN ATAMALARI
+            if (i == 5) {
+                tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, tugla_genislik, 10.0f, sf::Color(128,128,128), -1));
             }
-            else{
+            else {
+                // Kırılabilen tuğlalar.
+                int tugla_cani;
+                if(i>=4){
+                    tugla_cani=1;
+                } 
+                else if((i<4)&&(i>=3)){
+                    tugla_cani=2;
+                }
+                else {tugla_cani = 3;}
 
-
-            int kumeSatiri = i / 4; 
-            int kumeSutunu = j / 5; 
-            gecerliRenk = kumeRenkleri[kumeSatiri][kumeSutunu];
-
-           
-            int satir_ıd_x = i % 4; //Satırları bulduk.
-
-
-            if (satir_ıd_x == 3){
-                tugla_cani = 1; // En alt: 1 vuruş.
-            }
-            else if (satir_ıd_x == 2){
-                tugla_cani = 1; // Orta alt: 2 vuruş.
-            }
-        
-            else if (satir_ıd_x== 1){
-                tugla_cani = 2; // Orta üst: 3 vuruş.
-            }
-            else{
-                tugla_cani = 2; // En üst: 4 vuruş
-            }
-
-        
-            }
-
-            if(i!=8){
-            tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, 20.0f, 20.0f, gecerliRenk, tugla_cani));
-            }
-            else{
-            tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, 20.0f, 10.0f, gecerliRenk, tugla_cani));
-
+                tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, tugla_genislik, tugla_yukseklik, satirRenkleri[i], tugla_cani));
             }
         }
     }
+
+    // İşimiz bitince oyunun genel rastgeleliği (top sekmesi vb.) bozulmasın diye sıfırlıyoruz.
+    srand(static_cast<unsigned>(time(0))); 
 }
-
-
-
 
 
 
@@ -281,7 +313,7 @@ void Oyun::ciz(){
 void Oyun::oyunu_sıfırla(){
     oyun_bitti_mi=false;
     can=3;
-    skor=0;
+    skor_ekranim.skoru_sifirla();
 
 
     seviye_ekranim.seviyeyi_sifirla();

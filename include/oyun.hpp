@@ -29,7 +29,6 @@ private:
     sf::Texture kalp_logosu;
     sf::Font font;
     int can;
-    int skor;
     bool oyun_bitti_mi;
    
     
