@@ -64,8 +64,10 @@ void Top::hiz_arttir(float carpan){
     top_hizi_x*=carpan;
 }
 
+void Top::tugladan_sek_x(){
+    top_hizi_x=-top_hizi_x;
+}
 
-void Top::tugladansek(){
-      top_hizi_y = -top_hizi_y;
-
+void Top::tugladan_sek_y(){
+    top_hizi_y=-top_hizi_y;
 }

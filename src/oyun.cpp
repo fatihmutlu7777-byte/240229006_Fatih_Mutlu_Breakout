@@ -133,7 +133,7 @@ void Oyun::tuglalari_diz() {
                 else if((i<4)&&(i>=3)){
                     tugla_cani=2;
                 }
-                else {tugla_cani = 3;}
+                else {tugla_cani = 2;}
 
                 tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, tugla_genislik, tugla_yukseklik, satirRenkleri[i], tugla_cani));
             }
@@ -216,14 +216,20 @@ void Oyun::guncelle() {
 
 
      for (auto& t : tuglalarim) {
-        if (!t.kirildi_mi && topum.getSinirlar().intersects(t.getSinirlar())) {
+        sf::FloatRect kesisim;
+        if (!t.kirildi_mi && topum.getSinirlar().intersects(t.getSinirlar(),kesisim)) {
             if(t.baslangic_cani!=-1){
             t.darbe_al();
             if (t.kirildi_mi) {
                 skor_ekranim.skor_ekle(1);
             }
         }
-            topum.tugladansek();
+            if(kesisim.width < kesisim.height){
+                topum.tugladan_sek_x();
+            }
+            else{
+                topum.tugladan_sek_y();
+            }
             break; 
         }
     }
@@ -305,7 +311,7 @@ void Oyun::ciz(){
     skor_ekranim.ciz(pencere);
     seviye_ekranim.ciz(pencere);
     }
-    
+
     if(oyun_bitti_mi){
         oyunsonu_ekranim.ciz(pencere);
 

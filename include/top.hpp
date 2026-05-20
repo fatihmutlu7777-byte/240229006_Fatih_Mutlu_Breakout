@@ -17,7 +17,8 @@ public:
     void guncelle();
     void ciz(sf::RenderWindow& t_window);
     void rakettensek(float raketMerkezi);
-    void tugladansek();
+    void tugladan_sek_x();
+    void tugladan_sek_y();
     void resetle_top();
     void hiz_arttir(float carpan);
 
