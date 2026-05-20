@@ -81,10 +81,6 @@ void Tugla::ciz(sf::RenderWindow& pencere){
 
 
 
-void Top::tugladansek(){
-      top_hizi_y = -top_hizi_y;
-
-}
 
 void Tugla::darbe_al(){
     dayaniklilik--;

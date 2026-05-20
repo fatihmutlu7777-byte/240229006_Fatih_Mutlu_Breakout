@@ -63,3 +63,9 @@ void Top::ciz(sf::RenderWindow& pencere) {
 void Top::hiz_arttir(float carpan){
     top_hizi_x*=carpan;
 }
+
+
+void Top::tugladansek(){
+      top_hizi_y = -top_hizi_y;
+
+}

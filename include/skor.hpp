@@ -1,14 +1,14 @@
 #ifndef SKOR_HPP
 #define SKOR_HPP
 #include <SFML/Graphics.hpp>
-using namespace sf;
+
 
 class Skor_ekrani{
 
     private:
     int skor;
-    Font font;
-    Text yazi;
+    
+    sf::Text yazi;
 
     public:
 
@@ -16,7 +16,8 @@ class Skor_ekrani{
     void skor_ekle(int puan);
     int getskor();
     void skoru_sifirla();
-    void ciz(RenderWindow& pencere);
+    void ciz(sf::RenderWindow& pencere);
+    void fontu_ayarla(const sf::Font& ana_font);
 
 
 };

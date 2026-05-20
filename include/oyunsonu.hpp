@@ -3,24 +3,24 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-using namespace sf;
+
 
 class Oyun_sonu{
 
     private:
-    Font font;
-    RectangleShape arka_plan_kutusu;
-    Text baslik_metni;
-    Text skor_metni;
-    Text bilgi_metni;
-    Text seviye_metni;
+    sf::RectangleShape arka_plan_kutusu;
+    sf::Text baslik_metni;
+    sf::Text skor_metni;
+    sf::Text bilgi_metni;
+    sf::Text seviye_metni;
 
     public:
 
     Oyun_sonu(float x,float y);
     void skoru_ayarla(int son_skor);
     void seviyeyi_ayarla(int son_seviye);
-    void ciz(RenderWindow& pencere);
+    void ciz(sf::RenderWindow& pencere);
+    void fontu_ayarla(const sf::Font& ana_font);
     
 
 };

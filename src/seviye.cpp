@@ -4,14 +4,9 @@ using namespace std;
 
 Seviye_ekrani::Seviye_ekrani(float x, float y){
     seviye=1;
-    if (!font.loadFromFile("../assets/arial.ttf")) {
-
-        // Hata durumu için program çökmesin diye.
-        
-    }
-    yazi.setFont(font);
+    
     yazi.setCharacterSize(18);
-    yazi.setFillColor(Color::White);
+    yazi.setFillColor(sf::Color::White);
     yazi.setPosition(x,y);
     yazi.setString("Seviye: 1");
 }
@@ -38,6 +33,10 @@ void Seviye_ekrani::seviyeyi_sifirla(){
 
 
 
-void Seviye_ekrani::ciz(RenderWindow& pencere){
+void Seviye_ekrani::ciz(sf::RenderWindow& pencere){
     pencere.draw(yazi);
+}
+
+void Seviye_ekrani::fontu_ayarla(const sf::Font& ana_font) {
+    yazi.setFont(ana_font);
 }

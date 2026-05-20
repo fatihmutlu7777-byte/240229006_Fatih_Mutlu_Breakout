@@ -2,7 +2,7 @@
 #define RAKET_HPP
 
 #include <SFML/Graphics.hpp>
-using namespace std;
+
 
 
 class Raket{

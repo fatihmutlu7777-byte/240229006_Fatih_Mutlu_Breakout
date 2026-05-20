@@ -27,6 +27,10 @@ Oyun::Oyun()
         // Hata durumu için program çökmesin diye.
         
     }
+    
+    skor_ekranim.fontu_ayarla(font);
+    seviye_ekranim.fontu_ayarla(font);
+    oyunsonu_ekranim.fontu_ayarla(font);
 
     tuglalari_diz();
 
@@ -296,9 +300,12 @@ void Oyun::ciz(){
         }
     }
 
+
+    if(!oyun_bitti_mi){
     skor_ekranim.ciz(pencere);
     seviye_ekranim.ciz(pencere);
-
+    }
+    
     if(oyun_bitti_mi){
         oyunsonu_ekranim.ciz(pencere);
 

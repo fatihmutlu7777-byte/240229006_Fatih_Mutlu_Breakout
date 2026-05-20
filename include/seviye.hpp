@@ -1,14 +1,13 @@
 #ifndef SEVİYE_HPP
 #define SEVİYE_HPP
 #include <SFML/Graphics.hpp>
-using namespace sf;
+
 
 
 class Seviye_ekrani{
 
     private:
-    Font font;
-    Text yazi;
+    sf::Text yazi;
     int seviye;
 
 
@@ -17,7 +16,8 @@ class Seviye_ekrani{
     void seviye_ekle(int sonraki_seviye);
     void seviyeyi_sifirla();
     int getseviye();
-    void ciz(RenderWindow& pencere);
+    void ciz(sf::RenderWindow& pencere);
+    void fontu_ayarla(const sf::Font& ana_font);
 
 
 };
