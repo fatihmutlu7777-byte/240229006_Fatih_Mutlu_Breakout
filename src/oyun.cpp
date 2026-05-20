@@ -151,7 +151,7 @@ void Oyun::yeni_seviye_yukle(){
     
     konumları_sıfırla();
     tuglalari_diz();
-    topum.hiz_arttir(1.1f);
+    topum.hiz_arttir(1.3f);
 
    
 }
@@ -208,6 +208,8 @@ void Oyun::olaylari_isle(){
 void Oyun::guncelle() {
    
 
+    
+
     if (oyun_bitti_mi) return;
 
 
@@ -243,9 +245,9 @@ void Oyun::guncelle() {
     }
 
     if(seviye_bitti_mi){
-        
-        yeni_seviye_yukle();
         seviye_ekranim.seviye_ekle(1);
+        yeni_seviye_yukle();
+        
     }
 
         
