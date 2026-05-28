@@ -1,73 +1,81 @@
-YZM104 Programlama II - Oyun Projesi: Breakout
-Öğrenci: Fatih Mutlu - 240229006
-Bölüm: Yazılım Mühendisliği, Kocaeli Üniversitesi
+# YZM104 Programlama II - Breakout Oyunu
 
-Bu proje, C++ ve SFML kütüphanesi kullanılarak geliştirilmiş dinamik bir "Breakout / Tuğla Kırma" oyunudur. Proje, nesne yönelimli programlama (OOP) prensiplerine uygun olarak tasarlanmış olup modüler bir dosya hiyerarşisine (src, include, assets) sahiptir.
+## Öğrenci Bilgileri
+- Fatih Mutlu - 240229006
+- Kocaeli Üniversitesi - Yazılım Mühendisliği
 
-🚀 Proje Özellikleri ve Mekanikler
-Özgün Seviye Üretimi (Asal Sayı Hash Motoru): Bölüm tasarımları statik dizilerden çekilmez; matematiksel bir karma (hash) formülüyle her seviyede benzersiz dizilimler oluşturulur.
+## Proje Açıklaması
 
-Katmanlı Hasar ve Kırılma Fiziği: Tuğlalar aldıkları hasara göre farklı açılarda dinamik çatlak görselleri (texture) yükler.
+Bu proje, C++ ve SFML kullanılarak geliştirilmiş modüler bir Breakout (Tuğla Kırma) oyunudur.
 
-Hassas Çarpışma ve Sekme (AABB): Topun rakete çarptığı noktaya göre x ve y eksenindeki sekme ivmesi matematiksel olarak hesaplanır.
+Projede nesne yönelimli programlama prensipleri kullanılmış olup oyun sistemi farklı sınıflar halinde tasarlanmıştır.
 
-Optimizasyon: Bellek sızıntılarını önlemek amacıyla Font ve Texture gibi ağır kaynaklar yöneticiler tarafından tek bir kez yüklenip (Bağımlılık Enjeksiyonu) ilgili sınıflara referans olarak dağıtılır.
+## Özellikler
 
-🎮 Kontroller
-Sol Yön Tuşu / Sağ Yön Tuşu: Raketi hareket ettirir.
+- Klavye kontrollü raket sistemi
+- Gerçek zamanlı çarpışma sistemi
+- Procedural seviye üretimi
+- Çok katmanlı tuğla hasar sistemi
+- Skor ve seviye sistemi
+- Oyun sonu ekranı
+- Modüler proje yapısı
 
-ENTER: Oyun bittiğinde veya kazanıldığında yeniden başlatır.
+## Kullanılan Teknolojiler
 
-ESC: Oyundan çıkış yapar.
+| Teknoloji | Açıklama |
+|---|---|
+| C++17 | Oyun mantığı |
+| SFML 2.6.1 | Grafik sistemi |
+| GCC 14.2.0 | Derleyici |
+| Git & GitHub | Versiyon kontrol |
+| CMake | Build sistemi |
+| Visual Studio Code | IDE |
 
-🛠️ Sistem Gereksinimleri
-Projeyi kendi bilgisayarınızda derleyip çalıştırabilmeniz için aşağıdaki araçların sisteminizde kurulu olması ve sistem yoluna (PATH) eklenmiş olması gerekmektedir:
+## Proje Yapısı
 
-Git (Projeyi klonlamak için)
+src/
+ ├── main.cpp
+ ├── oyun.cpp
+ ├── top.cpp
+ ├── raket.cpp
+ ├── tugla.cpp
+ ├── skor.cpp
+ ├── seviye.cpp
+ └── oyunsonu.cpp
 
-CMake (Minimum sürüm 3.10)
+include/
+ ├── oyun.hpp
+ ├── top.hpp
+ ├── raket.hpp
+ ├── tugla.hpp
+ ├── skor.hpp
+ ├── seviye.hpp
+ └── oyunsonu.hpp
 
-C++ Derleyicisi (C++17 destekli, örn: MinGW, GCC veya MSVC)
+assets/
+ ├── arial.ttf
+ ├── catlak.png
+ ├── kalp.png
 
-SFML Kütüphanesi (Sürüm 2.5 veya üzeri, CMake'in bulabileceği şekilde yapılandırılmış olmalıdır)
+## Derleme
 
-⚙️ Kurulum ve Derleme Adımları
-Aşağıdaki komutları sırasıyla terminalinizde (veya Komut İstemcisi / PowerShell) çalıştırarak projeyi derleyebilirsiniz.
-
-1. Projeyi Bilgisayarınıza Klonlayın
-
-Bash
-git clone <GITHUB_REPO_LINKIN>
-2. Proje Dizinine Girin
-
-Bash
-cd BREAKOUT_PROJE
-3. Derleme (Build) Klasörü Oluşturun ve İçine Girin
-
-Bash
+```bash
 mkdir build
 cd build
-4. CMake Yapılandırmasını Başlatın
-
-Bash
 cmake ..
-Not: Windows üzerinde MinGW kullanıyorsanız ve üstteki komut hata verirse şu komutu kullanın: cmake -G "MinGW Makefiles" ..
+make
+```
 
-5. Projeyi Derleyin
+## Çalıştırma
 
-Bash
-cmake --build .
-6. Oyunu Çalıştırın
-Derleme tamamlandıktan sonra, assets klasörü CMake tarafından otomatik olarak çalıştırılabilir dosyanın yanına kopyalanacaktır. Oyunu başlatmak için:
-
-Windows için:
-
-Bash
-./Breakout.exe
-Linux / macOS için:
-
-Bash
+```bash
 ./Breakout
-📺 Demo Video
+```
+
+## GitHub Repo
+
+https://github.com/fatihmutlu7777-byte/240229006_Fatih_Mutlu_Breakout
+
+## Demo Video
+
 https://drive.google.com/file/d/1AKDEgAd2od4gF2GsV-deK3ZspQfFYabD/view?usp=sharing
-[Projenin oynanış videosunu izlemek için buraya tıklayın] (Demo video linki olacak henüz yok.)
