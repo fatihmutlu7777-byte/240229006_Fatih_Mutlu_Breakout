@@ -68,7 +68,7 @@ void Oyun::tuglalari_diz() {
         sf::Color::Green, sf::Color::Cyan
     };
 
-    for (int i = 0; i <= 5; i++) { 
+    for (int i = 0; i <= 4; i++) { 
         for (int j = 0; j < 10; j++) { 
 
             // 1. BOŞLUK VE KAPI ALGORİTMASI
@@ -121,11 +121,10 @@ void Oyun::tuglalari_diz() {
             float yPozisyonu = 80.0f + (i * 35.0f); 
 
             // 3. RENK VE CAN ATAMALARI
-            if (i == 5) {
-                tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, tugla_genislik, 10.0f, sf::Color(128,128,128), -1));
-            }
-            else {
-                // Kırılabilen tuğlalar.
+           
+            if(i>=0){
+
+            
                 int tugla_cani;
                 if(i>=4){
                     tugla_cani=1;
