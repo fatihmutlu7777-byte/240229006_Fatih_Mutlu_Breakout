@@ -130,7 +130,7 @@ void Oyun::tuglalari_diz() {
                     tugla_cani=1;
                 } 
                 else if((i<4)&&(i>=3)){
-                    tugla_cani=2;
+                    tugla_cani=1;
                 }
                 else {tugla_cani = 2;}
 
