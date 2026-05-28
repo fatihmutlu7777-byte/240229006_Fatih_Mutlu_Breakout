@@ -69,4 +69,5 @@ Linux / macOS için:
 Bash
 ./Breakout
 📺 Demo Video
+https://drive.google.com/file/d/1AKDEgAd2od4gF2GsV-deK3ZspQfFYabD/view?usp=sharing
 [Projenin oynanış videosunu izlemek için buraya tıklayın] (Demo video linki olacak henüz yok.)
