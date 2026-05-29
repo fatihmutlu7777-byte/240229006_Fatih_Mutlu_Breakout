@@ -23,8 +23,8 @@ void Tugla::ciz(sf::RenderWindow& pencere){
     if(!kirildi_mi){
         pencere.draw(tuglanin_sekli);
 
-        //Eğer tuğla kırılmaz değilse ve hasar aldıysa çatlakları çizer.
-        if (baslangic_cani != -1 && dayaniklilik < baslangic_cani) {
+        //Eğer tuğla hasar aldıysa çatlakları çizer.
+        if (dayaniklilik < baslangic_cani) {
             
             // Tuğlanın kaç kere vurulduğunu hesaplıyoruz.
             int alinan_hasar = baslangic_cani - dayaniklilik;
