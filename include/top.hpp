@@ -20,6 +20,7 @@ public:
     void tugladan_sek_x();
     void tugladan_sek_y();
     void resetle_top();
+    void resetle_top_can();
     void hiz_arttir(float carpan);
 
     

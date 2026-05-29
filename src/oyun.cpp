@@ -150,7 +150,7 @@ void Oyun::yeni_seviye_yukle(){
     
     konumları_sıfırla();
     tuglalari_diz();
-    topum.hiz_arttir(1.3f);
+    topum.hiz_arttir(1.3f);//Topun hızı artar.
 
    
 }
@@ -265,7 +265,9 @@ void Oyun::guncelle() {
             oyunsonu_ekranim.seviyeyi_ayarla(seviye_ekranim.getseviye());
 
         } else {
-            konumları_sıfırla();
+            topum.resetle_top_can();
+            raketim.resetle_raket();
+          
         }
     }
 }

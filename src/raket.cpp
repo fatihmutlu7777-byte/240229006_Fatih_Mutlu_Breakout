@@ -35,6 +35,7 @@ void Raket::resetle_raket(){
 }
 
 
+
 void Raket::ciz(RenderWindow& pencere){
 
     pencere.draw(raketin_sekli);
