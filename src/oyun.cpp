@@ -130,9 +130,11 @@ void Oyun::tuglalari_diz() {
                     tugla_cani=1;
                 } 
                 else if((i<4)&&(i>=3)){
-                    tugla_cani=1;
+                    tugla_cani=2;
                 }
-                else {tugla_cani = 2;}
+                else{
+                    tugla_cani=3;
+                }
 
                 tuglalarim.push_back(Tugla(xPozisyonu, yPozisyonu, tugla_genislik, tugla_yukseklik, satirRenkleri[i], tugla_cani));
             }
