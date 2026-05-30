@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Oyun_sonu::Oyun_sonu(float x, float y){
+Oyun_sonu::Oyun_sonu(float x, float y){//Oyun sonu ekranının özellikleri.
    
     
     arka_plan_kutusu.setSize(sf::Vector2f(500.0f,300.0f));
@@ -44,14 +44,14 @@ Oyun_sonu::Oyun_sonu(float x, float y){
 }
 
 
-void Oyun_sonu::skoru_ayarla(int son_skor){
+void Oyun_sonu::skoru_ayarla(int son_skor){ //Oyun bitince gözüken skoru ayarlar.
     
     skor_metni.setString("Skorunuz: "+::to_string(son_skor));
     skor_metni.setOrigin(skor_metni.getLocalBounds().width / 2.0f, 0);
     skor_metni.setPosition(400.0f, 250.0f);// Ekranın tam ortası.
 }
 
-void Oyun_sonu::seviyeyi_ayarla(int son_seviye){
+void Oyun_sonu::seviyeyi_ayarla(int son_seviye){//Oyun bitince gözüken seviyeyi ayarlar.
 
     seviye_metni.setString("Seviyeniz: " + ::to_string(son_seviye)); 
     seviye_metni.setOrigin(seviye_metni.getLocalBounds().width / 2.0f, 0); // Ortalarız.
@@ -60,7 +60,7 @@ void Oyun_sonu::seviyeyi_ayarla(int son_seviye){
 
 
 
-void Oyun_sonu::ciz(sf::RenderWindow& pencere){
+void Oyun_sonu::ciz(sf::RenderWindow& pencere){//Ekrana çizer.
     pencere.draw(arka_plan_kutusu);
     pencere.draw(bilgi_metni);
     pencere.draw(skor_metni);
@@ -70,7 +70,7 @@ void Oyun_sonu::ciz(sf::RenderWindow& pencere){
 
 }
 
-void Oyun_sonu::fontu_ayarla(const sf::Font& ana_font) {
+void Oyun_sonu::fontu_ayarla(const sf::Font& ana_font) {//Fontları ayarlar.
     baslik_metni.setFont(ana_font);
     skor_metni.setFont(ana_font);
     bilgi_metni.setFont(ana_font);

@@ -4,7 +4,7 @@
 sf::Texture Tugla::catlak_dokusu;
 
 
-Tugla::Tugla(float x,float y,float genişlik,float yukseklik,sf::Color renk,int tugla_cani){
+Tugla::Tugla(float x,float y,float genişlik,float yukseklik,sf::Color renk,int tugla_cani){//Tuğlaların özellikleri.
     dayaniklilik = tugla_cani;       
     baslangic_cani = tugla_cani;
     tuglanin_sekli.setPosition(x,y);
@@ -19,7 +19,7 @@ Tugla::Tugla(float x,float y,float genişlik,float yukseklik,sf::Color renk,int 
 
 
 
-void Tugla::ciz(sf::RenderWindow& pencere){
+void Tugla::ciz(sf::RenderWindow& pencere){//Ekrana çizer.
     if(!kirildi_mi){
         pencere.draw(tuglanin_sekli);
 
@@ -82,7 +82,7 @@ void Tugla::ciz(sf::RenderWindow& pencere){
 
 
 
-void Tugla::darbe_al(){
+void Tugla::darbe_al(){//Tuğlaya çarptımı bakar ve tuğlanın canını azaltır.
     dayaniklilik--;
 
 

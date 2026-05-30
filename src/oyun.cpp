@@ -57,9 +57,9 @@ void Oyun::tuglalari_diz() {
     int id = (anlik_seviye * 83) % 144; 
 
     // O id'yi parçalayıp haritamızın özelliklerini belirliyoruz:
-    int ana_desen  = id % 8;                 // 8 farklı şekil
-    int p1         = (id / 8) % 3 + 1;       // 1, 2 veya 3 çarpanı
-    int p2         = (id / 24) % 3;          // 0, 1 veya 2 kayma mesafesi
+    int ana_desen  = id % 8;                 // 8 farklı şekil.
+    int p1         = (id / 8) % 3 + 1;       // 1, 2 veya 3 çarpanı.
+    int p2         = (id / 24) % 3;          // 0, 1 veya 2 kayma mesafesi.
     bool ters_cevir= (id / 72) % 2 == 0;     // Düz mü, ters mi?
 
     // Renklerimiz

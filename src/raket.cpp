@@ -1,7 +1,7 @@
 #include"../include/raket.hpp"
 using namespace sf;
 
-Raket::Raket(){
+Raket::Raket(){//Raketin özellikleri.
    raketin_hizi=15.0f;
    raketin_sekli.setSize(Vector2f(100.0f,20.0f));
    raketin_sekli.setFillColor(Color::White);
@@ -12,7 +12,7 @@ Raket::Raket(){
 
 }
 
-void Raket::guncelle(){
+void Raket::guncelle(){//Raketin hareketi.
     if(Keyboard::isKeyPressed(Keyboard::Left)&& raketin_sekli.getPosition().x>0){
         
         raketin_sekli.move(-raketin_hizi,0.0f);
@@ -30,13 +30,13 @@ void Raket::guncelle(){
 }
 
 
-void Raket::resetle_raket(){
+void Raket::resetle_raket(){//Raketi resetler başlangıç konumuna yollar.
     raketin_sekli.setPosition(350.0f, 550.0f);
 }
 
 
 
-void Raket::ciz(RenderWindow& pencere){
+void Raket::ciz(RenderWindow& pencere){//Ekrana çizer.
 
     pencere.draw(raketin_sekli);
 }
